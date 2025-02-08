@@ -5,6 +5,12 @@ project("lazy_wallet")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 
+# Set custom directories for build outputs
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_OBJECTS_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/obj)
+
 # Find OpenSSL package
 find_package(openssl REQUIRED CONFIG)
 
@@ -13,6 +19,14 @@ add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/secp256k1 ${CMAKE_CURRENT_BINARY_DI
 
 add_library(${CMAKE_PROJECT_NAME} SHARED
         native-lib.cpp)
+
+# Set output directories specifically for your target
+set_target_properties(${CMAKE_PROJECT_NAME} PROPERTIES
+        RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
+        LIBRARY_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+        ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib
+        OBJECTS_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/obj
+)
 
 find_library(log-lib log)
 
