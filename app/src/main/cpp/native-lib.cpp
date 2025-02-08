@@ -27,3 +27,4 @@ Java_com_example_lazy_1wallet_MainActivity_stringFromJNI(
     std::string hello = "Random bytes: " + std::string(hex_string);
     return env->NewStringUTF(hello.c_str());
 }
+
