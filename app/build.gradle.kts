@@ -18,6 +18,7 @@ android {
         externalNativeBuild {
             cmake {
                 cppFlags += "-std=c++17"
+                arguments("-DANDROID_STL=c++_shared")
             }
         }
     }
@@ -46,11 +47,12 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        prefab = true
     }
 }
 
 dependencies {
-
+    implementation(libs.openssl)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
